@@ -132,7 +132,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:  # noqa:
         cmd_type = service.data.get("cmd_type")
         cmd_body = service.data.get("cmd_body")
 
-        _LOGGER.debug("Sending command to device [%s]: cmd_type=%s, cmd_body=%s", device_id, cmd_type, cmd_body)
+        _LOGGER.error("Sending command to device [%s]: cmd_type=%s, cmd_body=%s", device_id, cmd_type, cmd_body)
         try:
             cmd_body = bytearray.fromhex(cmd_body)
         except ValueError:
