@@ -102,6 +102,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:  # noqa:
         device_id: int = service.data["device_id"]
         attr = service.data["attribute"]
         value = service.data["value"]
+
+    _LOGGER.info("Set attribute: attr=%s, value=%s, device_id=%s", attr, value, device_id)
+
         dev: MideaDevice = hass.data[DOMAIN][DEVICES].get(device_id)
         if dev:
             if attr == "fan_speed" and value == "auto":
@@ -132,7 +135,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:  # noqa:
         cmd_type = service.data.get("cmd_type")
         cmd_body = service.data.get("cmd_body")
 
-        _LOGGER.error("Sending command to device [%s]: cmd_type=%s, cmd_body=%s", device_id, cmd_type, cmd_body)
         try:
             cmd_body = bytearray.fromhex(cmd_body)
         except ValueError:
